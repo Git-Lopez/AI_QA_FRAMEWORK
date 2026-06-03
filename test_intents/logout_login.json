@@ -1,0 +1,6 @@
+{
+  "story": "User logs out successfully from OrangeHRM",
+  "feature": "Logout",
+  "system": "OrangeHRM",
+  "tags": ["smoke", "regression"]
+}

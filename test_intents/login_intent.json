@@ -1,0 +1,12 @@
+{
+  "feature": "Login",
+  "story": "User logs in",
+  "type": "ui",
+  "priority": "high",
+  "system": "OrangeHRM",
+  "data": {
+    "username": "Admin",
+    "password": "admin123"
+  },
+  "tags": ["smoke", "regression"]
+}

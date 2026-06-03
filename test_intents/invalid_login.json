@@ -1,0 +1,6 @@
+{
+  "story": "User receives invalid credential error when password is incorrect",
+  "feature": "Login Validation",
+  "system": "OrangeHRM",
+  "tags": ["negative", "regression", "ui"]
+}

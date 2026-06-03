@@ -1,0 +1,57 @@
+{
+  "story": "HR admin searches for employee by employee ID",
+  "feature": "Employee Search",
+  "system": "OrangeHRM",
+
+  "module": "PIM",
+  "sub_module": "Employee Information Management",
+
+  "test_type": "UI",
+  "automation_type": "Playwright",
+  "framework": "Pytest",
+
+  "priority": "High",
+  "severity": "Critical",
+  "execution_type": "Regression",
+
+  "environment": "QA",
+  "browser": "Chromium",
+
+  "persona": "HR Admin",
+
+  "preconditions": [
+    "User must be authenticated",
+    "Employee record must already exist",
+    "PIM module must be accessible"
+  ],
+
+  "test_data": {
+    "employee_id": "EMP00123"
+  },
+
+  "expected_result": "Matching employee record should be displayed successfully",
+
+  "validations": [
+    "Employee search field accepts employee ID",
+    "Search returns correct employee record",
+    "Employee details are visible",
+    "No application errors displayed"
+  ],
+
+  "non_functional_checks": [
+    "Search response time under 3 seconds",
+    "UI elements render correctly"
+  ],
+
+  "tags": [
+    "regression",
+    "functional",
+    "ui",
+    "employee-search",
+    "critical-path"
+  ],
+
+  "owner": "QE Team",
+  "created_by": "AI QE Framework",
+  "version": "1.0"
+}

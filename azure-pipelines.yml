@@ -1,0 +1,94 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  PYTHON_VERSION: '3.13'
+
+stages:
+
+# =====================================================
+# STAGE 1 — SETUP
+# =====================================================
+
+- stage: Setup
+  jobs:
+
+  - job: InstallDependencies
+
+    steps:
+
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '$(PYTHON_VERSION)'
+
+    - script: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+      displayName: 'Install Python Dependencies'
+
+    - script: |
+        playwright install
+      displayName: 'Install Playwright Browsers'
+
+
+# =====================================================
+# STAGE 2 — AI TEST GENERATION + EXECUTION
+# =====================================================
+
+- stage: AI_QE_Execution
+
+  dependsOn: Setup
+
+  jobs:
+
+  - job: GenerateAndExecute
+
+    steps:
+
+    - script: |
+        run_ai_test \
+          --batch test_intents \
+          --execute
+      displayName: 'Generate and Execute AI Tests'
+
+
+# =====================================================
+# STAGE 3 — PUBLISH ALLURE REPORTS
+# =====================================================
+
+- stage: PublishReports
+
+  dependsOn: AI_QE_Execution
+
+  jobs:
+
+  - job: PublishArtifacts
+
+    steps:
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: 'reports/allure-results'
+        artifactName: 'allure-results'
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: 'reports/screenshots'
+        artifactName: 'screenshots'
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: 'reports/traces'
+        artifactName: 'playwright-traces'
+
+        # future invloves too
+
+       # run_ai_test \
+  #--jira QE-101 \
+  #--execute \
+  #--impact-analysis \
+  #--trace \
+  #--self-heal

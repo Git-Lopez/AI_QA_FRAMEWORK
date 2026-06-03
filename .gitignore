@@ -1,0 +1,17 @@
+.env
+
+__pycache__/
+*.pyc
+
+.pytest_cache/
+
+reports/allure-results/
+reports/traces/
+reports/screenshots/
+
+playwright-report/
+
+.idea/
+.vscode/
+
+.DS_Store
